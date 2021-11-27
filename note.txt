@@ -1,0 +1,23 @@
++ launchSettings: "launchUrl": "api/<route>"// sửa lại url theo api tương ứng
++ tạo Model
++ sửa connection string :
+"ConnectionStrings": {
+    "MemberConnection":"Server=.;Initial Catalog=MemberDB;User ID=guest;Password=12345678"
+  }
++ cài package
+Microsoft.EntityFrameworkCore //này cho entity
+Microsoft.EntityFrameworkCore.design //này cho codefirst
+Microsoft.EntityFrameworkCore.SqlServer //này connect SQL
+máy dùng net core nào thì tải version đó
++ tạo Context//connect với db
+
++ gắn Sqlserver vào DBcontext
+services.AddDbContext<MemberContext>(opt =>
+    opt.UseSqlServer(Configuration.GetConnectionString("MemberConnection")));
++ Tạo interface IMemberRepo: khai báo phương thức
++ Tạo SqlMemberRepo: implement IMemberRepo => connect trực tiếp đế SQL
++ map IMemberRepo với SqlMemberRepo: services.AddScoped<IMemberRepo, SqlMemberRepo>();
++ migration database: dotnet ef migrations add MyFirstMigration
++ map với db của sqlserver: dotnet ef database update
++ Tạo controller: 
++ dotnet run để start api, postman để test api
